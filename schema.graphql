@@ -1,0 +1,37 @@
+enum UserRole {
+  ADMIN
+  PATIENT
+  NUTRITIONIST
+  TRAINER
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type Link {
+  description: String!
+  id: String!
+  postedBy: User
+  url: String!
+}
+
+type User {
+  email: String!
+  id: String!
+  links: [Link!]!
+  name: String!
+  password: String!
+  userRole: UserRole!
+}
+
+type Mutation {
+  postLink(description: String!, url: String!): Link!
+  login(email: String!, password: String!): AuthPayload!
+  signup(email: String!, name: String!, password: String!): AuthPayload!
+}
+
+type Query {
+  feed: [Link!]!
+}
